@@ -1,11 +1,17 @@
-const assertEqual = require("../assertEqual");
+const assert = require('chai').assert;
 const tail = require("../tail");
 
-const result = tail(["Hello", "Lighthouse", "Labs"]);
-console.log(assertEqual(result[0], "Lighthouse"));
-console.log(assertEqual(result[1], "Labs"));
-assertEqual(result, ["Lighthouse", "Labs"]);
-
-const words = ["Yo Yo", "Lighthouse", "Labs"];
-tail(words); // no need to capture the return value since we are not checking it
-assertEqual(words.length, 3);
+describe("#tail", () => {
+  const result = ["Yoyo", "Lighthouse", "Labs"];
+  const words = result;
+  it("returns ['Lighthouse', 'Labs']", () => {
+    assert.deepEqual(tail(result), ["Lighthouse", "Labs"]);
+  });
+  it("returns [5,6] from [4,5,6]", () => {
+    assert.deepEqual(tail([4,5,6]), [5,6]);
+  });
+  it("result still has a length of 3", () => {
+    tail(result);
+    assert.deepEqual(result.length, 3);
+  });
+});
